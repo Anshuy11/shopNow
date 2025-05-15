@@ -9,8 +9,8 @@ const { theme, ToggleFunc } =useContext(ThemeColor)
 
 
   return (
-    <div className={theme === "Light" ? "   bg-gradient-to-t from-[#0d66af] to-headerColor relative  h-[100px] text-white flex  justify-between  " :
-        "   bg-gradient-to-t from-[#054b53] to-[#157e81]  h-[100px] text-white flex  justify-between relative "
+    <div className={theme === "Light" ? "   bg-[#FF6D00] to-headerColor relative  h-[100px] text-white flex  justify-between  " :
+        "   bg-black  h-[100px] text-white flex  justify-between relative "
         }>
           <div className="flex justify-start gap-8">
             <div
@@ -19,8 +19,8 @@ const { theme, ToggleFunc } =useContext(ThemeColor)
             >
               <div className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] flex gap-1 cursor-pointer ">
                 <img
-                  className="h-[80px] w-[100px] object-contain mt-1 "
-                  src="/logo5.png"
+                  className="h-[100px] w-[100px] object-contain -mt-2 "
+                  src="/logo.png"
                 />
               </div>
             </div>
@@ -33,14 +33,14 @@ const { theme, ToggleFunc } =useContext(ThemeColor)
                   ?
                   <div className=" bg-white   text-[14px] font-semibold items-end justify-end flex h-[25px] rounded-md w-7 border  border-white" >
              
-                  <div  onClick={ToggleFunc} className="cursor-pointer mt-[1px]    text-[14px] font-semibold items-end justify-end flex h-6 rounded-md w-5 bg-gradient-to-t from-[#157e81] to-[#054b53] border border-white ">
+                  <div  onClick={ToggleFunc} className="cursor-pointer mt-[1px]    text-[14px] font-semibold items-end justify-end flex h-6 rounded-md w-5 bg-black border border-white ">
                     
              </div>
                   </div>
                   :
                    <div  className=" bg-white    text-[14px] font-semibold items-end justify-start flex h-[25px] rounded-md w-7 border  border-white">
              
-                  <div  onClick={ToggleFunc} className="cursor-pointer mt-[1px]  text-[14px] font-semibold items-end justify-start flex h-6 rounded-md w-5 bg-gradient-to-t from-[#0d66af] to-headerColor border border-white  ">
+                  <div  onClick={ToggleFunc} className="cursor-pointer mt-[1px]  text-[14px] font-semibold items-end justify-start flex h-6 rounded-md w-5 bg-[#FF6D00] to-headerColor border border-white  ">
                     
              </div>
                   </div> 

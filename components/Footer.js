@@ -17,8 +17,8 @@ const Footer = () => {
       </div>
       <div className="   flex flex-col items-center justify-center  ">
        
-        <div className="text-[#032d60]   font-semibold sm:text-[10px] text-[10px] flex gap-1 p-1 ">
-        Made with Love &copy; 2025 , All rights reserved
+        <div className="text-[#032d60]   font-semibold sm:text-[10px] text-[10px] flex gap-1  ">
+        Made with &#x2764;&#xFE0F; 
         </div>
 
         {/* Constact us for phone */}
