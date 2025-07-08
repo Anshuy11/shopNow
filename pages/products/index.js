@@ -1,5 +1,7 @@
 import GlobalSearch from "@/components/GlobalSearch";
+import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
+
 
 const index = () => {
   const [productsList, setProductsList] = useState([]);
@@ -39,7 +41,7 @@ const index = () => {
       )
     );
   }, [debouncedQuery, productsList]);
-
+const router = useRouter()
   return (
     <>
       <div className="p-6">
@@ -54,19 +56,20 @@ const index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           {filteredData.map((product) => (
             <div
+               onClick={() => router.push(`/products/${product.id}`)}
               key={product.id}
-              className="border rounded-xl shadow-md p-4 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+              className="border border-gray-200 rounded-lg shadow-xl p-4 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             >
               <img
                 src={product.image}
                 alt={product.title}
                 className="h-24 object-contain w-full mb-4"
               />
-              <h4 className="font-semibold text-lg mb-2">{product.title}</h4>
-              <h5 className="text-gray-600 mb-2 text-[20px]">
-                ${product.price}
-              </h5>
-              <div className="text-[6px] text-gray-500 line-clamp-2 ">
+              <div className="font-semibold text-md  mb-2">{product.title}</div>
+              <div className=" mb-2 text-[18px]">
+              ₹ {product.price}
+              </div>
+              <div className="text-[12px] text-gray-500 line-clamp-2 ">
                 {product.description}
               </div>
             </div>
