@@ -18,22 +18,35 @@ ShopNow is a modern frontend-heavy e-commerce application focused on providing u
 
 📁 Folder Structure (Frontend)
 
-shopNow/
-│
-├── components/         # Reusable components (Header,Footer, LayOut ,  Loader, CartDataStoreInLocalStorage, GlobalSearch  ,PathBackButton.)
-├── pages/              # Next.js pages
-│   ├── index.js        # Call  product listing
-│   ├── products/index.js # Product Listing page
-│   ├── products/[id].js # Product detail page
-│   ├── api/            # API routes (server-side logic)
-│
-├── redux/              # Redux store setup
-│   ├── cartSlice.js
-│   ├── store.js
-│
-├── context/            # Theme Context API
-├── public/             # Static assets
-├── styles/             # Global styles
+## 📁 Folder Structure
+
+- **components/**
+  - `Header.jsx` – App header
+  - `Footer.jsx` – Footer section
+  - `Layout.jsx` – Common layout wrapper
+  - `Loader.jsx` – Loading spinner
+  - `CartDataStoreInLocalStorage.jsx` – Handles localStorage logic
+  - `GlobalSearch.jsx` – Global search bar
+  - `PathBackButton.jsx` – Go back button(Back Routing)
+
+- **pages/**
+  - `index.js` – Homepage
+  - `products/index.js` – Product listing page
+  - `products/[id].js` – Product detail page
+  - `theme_context/` – Context API for dual theme
+  - `cart.js/` – Store Cart Items
+  - `api/` – API route handlers (server-side logic)
+
+- **redux/**
+  - `cartSlice.js` – Cart logic with Redux Toolkit
+  - `store.js` – Redux store configuration
+
+
+- **styles/**
+  - `globals.css` – Global styles using Tailwind
+
+- **public/**
+  - Static assets (images, icons, etc.)
 
 
 📌 Upcoming Features
