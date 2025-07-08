@@ -1,4 +1,4 @@
-🛒 ShopNow –  E-commerce App
+🛒 ShopNow –  E-commerce App (Link - https://shop-now-chi.vercel.app/)
 ShopNow is a modern frontend-heavy e-commerce application focused on providing users with a fast and seamless shopping experience. This project is built using Next.js and Tailwind CSS, with Redux for state management and localStorage for cart persistence and dual theme with the help of context API.
 
 
