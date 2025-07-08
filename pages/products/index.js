@@ -1,4 +1,5 @@
 import GlobalSearch from "@/components/GlobalSearch";
+import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 
@@ -53,7 +54,7 @@ const router = useRouter()
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+       {loading ? <Loader/>: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           {filteredData.map((product) => (
             <div
                onClick={() => router.push(`/products/${product.id}`)}
@@ -74,7 +75,7 @@ const router = useRouter()
               </div>
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </>
   );

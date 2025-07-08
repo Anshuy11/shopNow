@@ -21,7 +21,6 @@ const cart = () => {
       </div>
     );
   }
-  console.log(cartItems, "cartItems");
   const router = useRouter();
 
   return (

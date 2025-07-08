@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "@/redux/cartSlice";
 import PathBackButton from "@/components/PathBackButton";
+import Loader from "@/components/Loader";
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const ProductDetail = () => {
     dispatch(removeFromCart(product.id));
   };
 
-  if (loading) return <p className="p-6">Loading...</p>;
+  if (loading) return <Loader/>;
   if (!product) return <p className="p-6">Product not found</p>;
 
   return (
