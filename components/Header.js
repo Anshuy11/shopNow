@@ -28,6 +28,18 @@ const { theme, ToggleFunc } =useContext(ThemeColor)
           </div>
 
           <div className="flex  items-center pl-3 gap-4">
+ <div
+        
+              className="flex justify-start items-start gap-6"
+            >
+              <div className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] flex gap-1 cursor-pointer ">
+                <img
+                  className="h-[100px] w-[100px] object-contain -mt-2 "
+                  src="/shopping-cart.png"
+                />
+              </div>
+            </div>
+
                   <div  className="flex flex-col items-center pl-3 mt-12">
                 {theme === "Light"
                   ?
