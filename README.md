@@ -1,5 +1,5 @@
-🛒 ShopNow –  E-commerce App (Link - https://shop-now-chi.vercel.app/)
-ShopNow is a modern frontend-heavy e-commerce application focused on providing users with a fast and seamless shopping experience. This project is built using Next.js and Tailwind CSS, with Redux for state management and localStorage for cart persistence and dual theme with the help of context API.
+🛒 - `ShopNow` –  E-commerce App (Link - https://shop-now-chi.vercel.app/)
+ - ShopNow is a modern frontend-heavy e-commerce application focused on providing users with a fast and seamless shopping experience. This project is built using Next.js and Tailwind CSS, with Redux for state management and localStorage for cart persistence and dual theme with the help of context API.
 
 
 🧠 Tech Stack
@@ -49,16 +49,16 @@ ShopNow is a modern frontend-heavy e-commerce application focused on providing u
   - Static assets (images, icons, etc.)
 
 
-📌 Upcoming Features
-✅ Razorpay test-mode integration with secure key handling
-🔐 Authentication 
+- **Upcoming Features/**
+-  Razorpay test-mode integration with secure key handling
+-  Authentication 
 
 
 
-🛠 How to Run Locally
-git clone https://github.com/Anshuy11/shopNow.git
-npm install
-npm run dev
+- **How to Run Locally/**
+  - git clone https://github.com/Anshuy11/shopNow.git
+  - npm install
+  - npm run dev
 
 
 

@@ -37,21 +37,24 @@ const cart = () => {
               className="flex items-center justify-between border p-3 rounded-lg shadow"
             >
               <div
-                onClick={() => router.push(`/products/${item.id}`)}
-                className="flex items-center space-x-4 md:w-2/3 w-4/5 cursor-pointer"
+               
+                className="flex items-center space-x-4 md:w-2/3 w-4/5 "
               >
                 <img
                   src={item.image}
                   alt={item.title}
                   className="w-16 h-16 object-contain"
                 />
-                <div className="w-full">
-                  <div className="font-normal text-[12px] line-clamp-2 lg:text-[14px] ">
+                <div   className="w-full">
+                  <div onClick={() => router.push(`/products/${item.id}`)} className="cursor-pointer">
+                    <div className="font-normal text-[12px] line-clamp-2 lg:text-[14px] ">
                     {item.title}
                   </div>
                   <div className="text-sm  ">₹ {item.price}</div>
+                  </div>
+                  
                   <div>
-                    <div className="flex items-center md:space-x-3 space-x-1 mt-2 md:hidden">
+                    <div className="flex items-center md:space-x-3 space-x-1 mt-2 md:hidden cursor-pointer">
                       <button
                         onClick={() => dispatch(decreaseQuantity(item.id))}
                         className="bg-gray-400 md:px-2 px-1 rounded"
@@ -72,10 +75,10 @@ const cart = () => {
                 </div>
               </div>
 
-              <div className="md:flex items-center md:space-x-3 space-x-1 hidden">
+              <div className="md:flex items-center md:space-x-3 space-x-1 hidden ">
                 <button
                   onClick={() => dispatch(decreaseQuantity(item.id))}
-                  className="bg-gray-400 md:px-2 px-1 rounded"
+                  className="bg-gray-400 md:px-2 px-1 rounded cursor-pointer"
                 >
                   -
                 </button>
@@ -84,7 +87,7 @@ const cart = () => {
                 </span>
                 <button
                   onClick={() => dispatch(increaseQuantity(item.id))}
-                  className="bg-gray-400 md:px-2 px-1 rounded"
+                  className="bg-gray-400 md:px-2 px-1 rounded cursor-pointer"
                 >
                   +
                 </button>
@@ -96,7 +99,7 @@ const cart = () => {
                 </p>
                 <button
                   onClick={() => dispatch(removeFromCart(item.id))}
-                  className="text-red-500 text-sm mt-1 text-[12px] md:text-[14px]"
+                  className="text-red-500 text-sm mt-1 text-[12px] md:text-[14px] cursor-pointer"
                 >
                   Remove
                 </button>
