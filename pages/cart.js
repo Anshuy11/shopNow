@@ -1,19 +1,108 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
+  clearCart
 } from "@/redux/cartSlice";
 import PathBackButton from "@/components/PathBackButton";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import SignInUpLofinForm from "@/components/SignInUpLofinForm";
+import { AuthContext } from "@/context/AuthContext";
+import MessageFunc from "@/components/MessageModal";
 
 const cart = () => {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [openMessage, setOpenMessage] = useState(false);
+  const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const { cartItems, totalQuantity, totalAmount } = useSelector(
+  const { cartItems, totalQuantity, totalAmount, } = useSelector(
     (state) => state.cart
   );
+  const messageCloseFunc = () => {
+    setTimeout(() => {
+      setOpenMessage(false);
+    }, 10000);
+  };
+  // Function to load the Razorpay script dynamically
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      // Check if the script is already loaded
+      if (
+        document.querySelector(
+          'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
+        )
+      ) {
+        return resolve(true); // Already loaded
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  // Function to handle the Razorpay payment
+  const handlePayment = async () => {
+    // Load Razorpay script
+    const res = await loadRazorpayScript();
+
+    if (!res) {
+      setOpenMessage(true);
+      messageCloseFunc();
+      setMessage("Failed to Open Razorpay. Please try again later.");
+      return;
+    }
+
+    // Get order data from your API
+    const data = await fetch("/api/razorpay", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: totalAmount * 100, // send dynamic amount in paise
+      }),
+    }).then((res) => res.json());
+
+    // Options for the Razorpay checkout modal
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Public Key from Razorpay dashboard
+      amount: data.amount, // Amount in paise
+      currency: data.currency,
+      name: "ShoNow",
+      description: "Test Transaction",
+      order_id: data.id, // The order ID received from Razorpay API
+      handler: function (response) {
+        setOpenMessage(true);
+        messageCloseFunc();
+        setMessage("Payment successful! Your order is arriving soon.");
+        dispatch(clearCart());
+
+      },
+      prefill: {
+        name: user.name,
+        email: user.email,
+        contact: "9999999999",
+      },
+      notes: {
+        address: "",
+      },
+      theme: {
+        color: "#FF6D00",
+      },
+    };
+
+    // Open the Razorpay payment modal
+    const razorpay = new window.Razorpay(options);
+    razorpay.open();
+  };
+
   /* If there is no Item In Cart */
   if (cartItems.length === 0) {
     return (
@@ -28,12 +117,8 @@ const cart = () => {
     <>
       <Head>
         <meta charSet="utf-8" />
-        
-        <title>
-          {
-            "ShopNow - Your Smart Shopping Destination."
-          }
-        </title>
+
+        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
         <meta
           name="description"
           content={
@@ -43,23 +128,11 @@ const cart = () => {
         <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="headLogo.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="headLogo.png"
-        />
+        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
         <meta
           property="og:title"
-          content={
-            "ShopNow - Your Smart Shopping Destination."
-          }
+          content={"ShopNow - Your Smart Shopping Destination."}
         />
         <meta property="og:type" content="website" />
         <meta
@@ -71,45 +144,45 @@ const cart = () => {
         <meta name="robots" content="max-image-preview:large"></meta>
         <meta name="robots" content="NOODP" />
         <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
-        <meta
-          property="og:image"
-          content="headLogo.png"
-        />
-     
-       
+        <meta property="og:image" content="headLogo.png" />
+
         <meta name="mobile-web-app-capable" content="yes" />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
-      
       </Head>
       <PathBackButton />
-
+      <SignInUpLofinForm setOpen={setOpen} open={open} />
       <div className="max-w-4xl mx-auto p-4 h-screen">
-        <h2 className=" font-bold mb-4">Your Cart</h2>
-
+        <h1 className=" font-bold mb-4">Your Cart</h1>
+        <MessageFunc
+          message={message}
+          setMessageOpen={setOpenMessage}
+          messageOpen={openMessage}
+          onClose={() => setOpenMessage(false)}
+        />
         <div className="space-y-4">
           {cartItems.map((item) => (
             <div
               key={item.id}
               className="flex items-center justify-between border p-3 rounded-lg shadow"
             >
-              <div
-               
-                className="flex items-center space-x-4 md:w-2/3 w-4/5 "
-              >
+              <div className="flex items-center space-x-4 md:w-2/3 w-4/5 ">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="w-16 h-16 object-contain"
                 />
-                <div   className="w-full">
-                  <div onClick={() => router.push(`/products/${item.id}`)} className="cursor-pointer">
+                <div className="w-full">
+                  <div
+                    onClick={() => router.push(`/products/${item.id}`)}
+                    className="cursor-pointer"
+                  >
                     <div className="font-normal text-[12px] line-clamp-2 lg:text-[14px] ">
-                    {item.title}
+                      {item.title}
+                    </div>
+                    <div className="text-sm  ">₹ {item.price}</div>
                   </div>
-                  <div className="text-sm  ">₹ {item.price}</div>
-                  </div>
-                  
+
                   <div>
                     <div className="flex items-center md:space-x-3 space-x-1 mt-2 md:hidden cursor-pointer">
                       <button
@@ -164,10 +237,46 @@ const cart = () => {
             </div>
           ))}
         </div>
+        <div></div>
 
-        <div className="mt-10 border-t border-gray-500 pt-4 text-right">
-          <p className=" font-md">Total Quantity: {totalQuantity}</p>
-          <p className=" font-md">Total: ₹ {totalAmount}</p>
+        <div className="mt-10 border-t border-gray-500 pt-4 md:flex justify-around hidden">
+          {Object?.keys(user)?.length > 0 ? (
+            <div
+              onClick={() => handlePayment()}
+              className="font-md cursor-pointer bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
+            >
+              Checkout
+            </div>
+          ) : (
+            <div
+              onClick={() => setOpen(true)}
+              className="font-md cursor-pointer bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
+            >
+              Login to Checkout
+            </div>
+          )}
+          <div className=" font-md">Quantity: {totalQuantity}</div>
+          <div className=" font-md">Total: ₹ {totalAmount}</div>
+        </div>
+
+        <div className="mt-10 border-t border-gray-500 pt-4 block md:hidden ">
+          <div className=" font-md">Quantity: {totalQuantity}</div>
+          <div className=" font-md">Total: ₹ {totalAmount}</div>
+          {Object?.keys(user)?.length > 0 ? (
+            <div
+              onClick={() => handlePayment()}
+              className="font-md cursor-pointer t bg-blue-500 text-white p-2 w-fit mt-2 rounded-md"
+            >
+              Checkout
+            </div>
+          ) : (
+            <div
+              onClick={() => setOpen(true)}
+              className="font-md cursor-pointer t bg-blue-500 text-white p-2 w-fit mt-2 rounded-md"
+            >
+              Login to Checkout
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,16 +1,22 @@
 import { useContext, useState } from "react";
-import { ThemeColor } from "@/pages/theme_context";
+import { ThemeColor } from "@/context/ThemeContext";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { AuthContext } from "@/context/AuthContext";
+import MobileSidebar from "./MobileSidebar";
+import SignInUpLofinForm from "./SignInUpLofinForm";
+import ConfirmationModal from "./ConfirmationModel";
 
 const Header = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+  const [signupLoginopen, setSignupLoginopen] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const { theme, ToggleFunc } = useContext(ThemeColor);
+  const { LogoutFunc, user, } =useContext(AuthContext);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const router = useRouter();
-
+  
   return (
     <div
       className={
@@ -19,21 +25,33 @@ const Header = (props) => {
           : "   bg-black  h-[100px] text-white flex  justify-between relative "
       }
     >
+      {" "}
+      <SignInUpLofinForm setOpen={setSignupLoginopen} open={signupLoginopen} />
+      <ConfirmationModal
+        isOpen={openConfirmModal}
+        onClose={() => setOpenConfirmModal(false)}
+        onConfirm={LogoutFunc}
+        closeSidebar={()=>setIsOpen(false)}
+        title="Log out"
+        message="Are you sure you want to logout."
+          />
       {/* Logo section */}
       <div className="flex justify-start gap-8">
         <div className="flex justify-start items-start gap-6">
           <div
             onClick={() => router.push("/")}
-            className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] flex gap-1 cursor-pointer "
+            className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] md:flex gap-1 cursor-pointer hidden"
           >
             <img
               className="h-[100px] w-[100px] object-contain -mt-2 "
               src="/logo.png"
             />
           </div>
+          <div className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] flex gap-1 cursor-pointer md:hidden">
+            <MobileSidebar theme={theme} />
+          </div>
         </div>
       </div>
-
       <div className="flex  items-center pl-3 gap-4">
         {/* Cart section */}
         <div
@@ -46,7 +64,7 @@ const Header = (props) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="w-10 h-10 mt-10"
+            className="w-9 h-9 mt-10"
           >
             <path
               strokeLinecap="round"
@@ -63,7 +81,7 @@ const Header = (props) => {
         </div>
 
         {/* Dual theme section */}
-        <div className="flex flex-col items-center pl-3 mt-12">
+        <div className="flex flex-col items-center pl-3 mt-10 pr-1 md:pr-0">
           <div
             className={`relative w-12 h-6 rounded-full border transition-all duration-500 ease-in-out ${
               theme === "Light"
@@ -83,24 +101,37 @@ const Header = (props) => {
           </div>
         </div>
         {/* User Information section */}
-        <div className="flex flex-col items-center mt-2">
+        <div className="md:flex flex-col items-center mt-2 hidden">
           <div
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
-            className="relative inline-block"
+            onMouseEnter={() => setUserOpen(true)}
+            onMouseLeave={() => setUserOpen(false)}
+            className="relative inline-block  "
           >
-            <div className="flex justify-center items-center   cursor-pointer mt-3 font-semibold text-[12px] ">
-              <button className="text-center pr-1">User Name</button>
-            </div>
-          </div>
-          <div className="text-white font-semibold text-[14px] pr-1 mt-2">
-            <div
-              onClick={() => setOpen(true)}
-              className="w-8 h-8 cursor-pointer"
-            >
-              <img src="/power-off.png" />
-              {/*  <p className="text-[14px]">Logout</p> */}
-            </div>
+            <img className="w-10 h-10 mt-5 cursor-pointer" src="/user.png" />
+            {userOpen && (
+              <div className="relative">
+                <div className="absolute right-1  w-fit  bg-gray-100 border border-gray-200 rounded-md shadow-lg z-50 p-3 text-sm">
+                  {Object?.keys(user)?.length>0  ? (
+                    <div>
+                    <div className="w-full text-left font-medium text-gray-800 ">
+                      {user.name}
+                      </div>
+                      <div className="w-full text-left font-medium text-gray-800 ">
+                      {user.email}
+                      </div>
+                      <div onClick={()=>setOpenConfirmModal(true)} className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer">
+                      Log Out
+                    </div>
+                    </div>
+                  
+                  ) : (
+                    <button onClick={()=>setSignupLoginopen(true)} className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer">
+                      Login
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
