@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetch(
-      "https://shop-now-backend-chi.vercel.app/api/auth/signup",
+    process.env.NEXT_PUBLIC_API_URL+ "/api/auth/signup",
       requestOptions
     )
       .then((response) => response.json())
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
       redirect: "follow",
     };
 
-    fetch("https://shop-now-backend-chi.vercel.app/api/auth/login", requestOptions)
+    fetch( process.env.NEXT_PUBLIC_API_URL+ "/api/auth/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.succss == true) {
