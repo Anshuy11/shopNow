@@ -53,12 +53,14 @@ export const AuthProvider = ({ children }) => {
           setMessageText("Signup successful.Please Login.");
           setMessageOpen(true);
           messageCloseFunc();
+        }else{
+           setMessageText(result.message);
+        setMessageOpen(true);
+        messageCloseFunc();
         }
       })
       .catch((error) => {
-        setMessageText(result.message);
-        setMessageOpen(true);
-        messageCloseFunc();
+       console.error(error)
       })
       .finally(() => setSignUpLoader(false));
   };
@@ -90,12 +92,15 @@ export const AuthProvider = ({ children }) => {
           setLoginSuccess(true)
           setMessageOpen(true);
           messageCloseFunc();
+        }else{
+           setMessageText(result.message);
+        setMessageOpen(true);
+        messageCloseFunc();
+
         }
       })
       .catch((error) => {
-        setMessageText(result.message);
-        setMessageOpen(true);
-        messageCloseFunc();
+       console.error(error)
       })
       .finally(() => setSignUpLoader(false));
   };
@@ -121,7 +126,9 @@ export const AuthProvider = ({ children }) => {
         setShowSignin,
         showSignin,
         loginSuccess,
-        signUpSuccess
+        signUpSuccess,
+        setSignUpSuccess,
+        setLoginSuccess
       }}
     >
       {children}

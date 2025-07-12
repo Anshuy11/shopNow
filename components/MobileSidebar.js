@@ -24,7 +24,7 @@ export default function MobileSidebar(props) {
       />
       <SignInUpLofinForm setOpen={setOpen} open={open} />
 
-      <button onClick={toggleSidebar} className="p-2">
+      <button onClick={toggleSidebar} className="p-2 mt-10">
         <Bars3Icon className="w-6 h-6 " />
       </button>
 
@@ -40,7 +40,7 @@ export default function MobileSidebar(props) {
       <div
         className={`fixed top-0 left-0 h-full w-2/3 shadow-lg z-50 ${
           props.theme == "Light"
-            ? "bg-white text-black"
+            ? "bg-gray-100 text-black"
             : "bg-gray-600 text-white"
         } transform  transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"

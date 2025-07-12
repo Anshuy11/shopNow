@@ -1,4 +1,4 @@
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ThemeColor } from "@/context/ThemeContext";
 import { AuthContext } from "@/context/AuthContext";
@@ -9,6 +9,12 @@ const SignInUpLofinForm = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    name: "",
+    password: "",
+  });
+  
 
   const cancelButtonRef = useRef(null);
 
@@ -23,29 +29,100 @@ const SignInUpLofinForm = (props) => {
     setShowSignin,
     signUpLoader,
     loginSuccess,
-    signUpSuccess
+    signUpSuccess,
+    setLoginSuccess,
+    setSignUpSuccess
   } = useContext(AuthContext);
-  /* SignUp */
-  const signUpHandleSubmit = (e) => {
+/* To close or clear the state  */
+ useEffect(() => {
+ 
+  if (signUpSuccess) {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setSignUpSuccess(false);
+  }
   
+  if (loginSuccess) {
+    setEmail("");
+    setPassword("");
+    props.setOpen(false);
+    setShowSignin(false);
+    setLoginSuccess(false);
+  }
+}, [signUpSuccess, loginSuccess]);
+  /* SignUp func */
+  const signUpHandleSubmit = (e) => {
     e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const newErrors = {
+      name: name.trim() === "" ? "Name cannot be empty or just spaces" : "",
+      email: !emailRegex.test(email) ? "Please enter a valid email" : "",
+      password:
+        password.length < 4 || password.length > 50
+          ? "Password must be between 4 and 50 characters"
+          : "",
+    };
+
+    setErrors(newErrors);
+
+    const isValid = Object.values(newErrors).every((err) => err === "");
+    if (!isValid) return;
+
     handleSubmitSignUp({ name, email, password });
-    if (signUpSuccess) {
-      setName("")
-      setEmail("")
-      setPassword("")
-    }
+   
+  };
+/* Loginfunc */
+  const loginHandleSubmit = (e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const newErrors = {
+      email: !emailRegex.test(email) ? "Please enter a valid email" : "",
+      password:
+        password.length < 4 || password.length > 50
+          ? "Password must be between 4 and 50 characters"
+          : "",
+    };
+
+    setErrors(newErrors);
+
+    const isValid = Object.values(newErrors).every((err) => err === "");
+    if (!isValid) return;
+
+    handleSubmitLogin({ email, password });
    
   };
 
-  const loginHandleSubmit = (e) => {
-    e.preventDefault();
-    handleSubmitLogin({ email, password });
-    if (loginSuccess) {
-      setEmail("")
-      setPassword("")
-    }
-   
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setErrors((prev) => ({
+      ...prev,
+      email:
+        value && !emailRegex.test(value) ? "Please enter a valid email." : "",
+    }));
+  };
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    setName(value);
+    setErrors((prev) => ({
+      ...prev,
+      name: value.trim() === "" ? "Name cannot be empty or just spaces." : "",
+    }));
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setErrors((prev) => ({
+      ...prev,
+      password:
+        value.length < 4 || value.length > 50
+          ? "Password must be between 4 and 50 characters."
+          : "",
+    }));
   };
   return (
     <Transition.Root show={props.open} as={Fragment} className="p-2 m-2 ">
@@ -54,7 +131,8 @@ const SignInUpLofinForm = (props) => {
         className="relative z-50 sm:block"
         initialFocus={cancelButtonRef}
         onClose={() => {
-          props.setOpen(false); setShowSignin(false);
+          props.setOpen(false);
+          setShowSignin(false);
         }}
       >
         <Transition.Child
@@ -97,7 +175,8 @@ const SignInUpLofinForm = (props) => {
                     type="button"
                     className="absolute top-3 right-2.5  bg-transparent  rounded-lg text-sm p-1.5 ml-auto inline-flex border border-red-500 dark:hover:bg-red-200 dark:hover:text-white"
                     onClick={() => {
-                      props.setOpen(false); setShowSignin(false);
+                      props.setOpen(false);
+                      setShowSignin(false);
                     }}
                     ref={cancelButtonRef}
                   >
@@ -130,11 +209,17 @@ const SignInUpLofinForm = (props) => {
                       <input
                         type="text"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => handleNameChange(e)}
+                        maxLength={100}
                         className="w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
                         placeholder="Enter your name"
                         required
-                      />
+                      />{" "}
+                      {errors.name && (
+                        <p className="text-red-400 text-sm mt-1">
+                          {errors.name}
+                        </p>
+                      )}
                     </div>
                   )}
 
@@ -143,11 +228,16 @@ const SignInUpLofinForm = (props) => {
                     <input
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => handleEmailChange(e)}
                       className="w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
                       placeholder="Enter your email"
                       required
-                    />
+                    />{" "}
+                    {errors.email && (
+                      <p className="text-red-400 text-sm mt-1">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -156,11 +246,18 @@ const SignInUpLofinForm = (props) => {
                       <input
                         type={showPassword ? "text" : "password"}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        minLength={4}
+                        maxLength={50}
+                        onChange={(e) => handlePasswordChange(e)}
                         className="w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-300 pr-10"
                         placeholder="Enter your password"
                         required
-                      />
+                      />{" "}
+                      {errors.password && (
+                        <p className="text-red-400 text-sm mt-1">
+                          {errors.password}
+                        </p>
+                      )}
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
@@ -171,19 +268,18 @@ const SignInUpLofinForm = (props) => {
                     </div>
                   </div>
 
-                  {signUpLoader ?
-                    <div
-                  
-                    className="w-full cursor-none bg-gray-500 text-white py-2 rounded-lg  transition  animate-pulse text-center"
-                  >
-                    Please wait...
-                  </div>
-                  : <button
-                    type="submit"
-                    className="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-                  >
-                    {showSignin ? "Sign Up" : "Login"}
-                  </button>}
+                  {signUpLoader ? (
+                    <div className="w-full cursor-none bg-gray-500 text-white py-2 rounded-lg  transition  animate-pulse text-center">
+                      Please wait...
+                    </div>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                    >
+                      {showSignin ? "Sign Up" : "Login"}
+                    </button>
+                  )}
 
                   <div
                     onClick={() => setShowSignin(!showSignin)}
