@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "@/redux/cartSlice";
+import {
+  addToCart,
+  removeFromCart,
+  toggleWishlistItem,
+} from "@/redux/cartSlice";
 import PathBackButton from "@/components/PathBackButton";
 import Loader from "@/components/Loader";
 import Head from "next/head";
+import MessageFunc from "@/components/MessageModal";
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -12,11 +17,17 @@ const ProductDetail = () => {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [openMessage, setOpenMessage] = useState(false);
 
   const cart = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
   const isInCart = cart?.find((item) => item.id === Number(id));
+  const wishlistItems = useSelector((state) => state.cart.wishlistItems);
+
+  const isInWishlist =
+    product && wishlistItems.some((item) => item.id === product.id);
 
   useEffect(() => {
     if (id) {
@@ -34,48 +45,31 @@ const ProductDetail = () => {
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(product.id));
   };
+    const messageCloseFunc = () => {
+    setTimeout(() => {
+      setOpenMessage(false);
+    }, 1500);
+  };
 
-  if (loading) return <Loader/>;
+  const handleWishlistToggle = () => {
+    dispatch(toggleWishlistItem(product));
+     setOpenMessage(true);
+        messageCloseFunc();
+        setMessage(isInWishlist ?"Product remove from wishlist." :"Product added to wishlist." );
+  };
+
+  if (loading) return <Loader />;
   if (!product) return <p className="p-6">Product not found</p>;
 
   return (
     <>
-        <Head>
-        <meta charSet="utf-8" />
-
-        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
-        <meta
-          name="description"
-          content={
-            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
-          }
-        />
-        <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
-        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
-        <meta
-          property="og:title"
-          content={"ShopNow - Your Smart Shopping Destination."}
-        />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:description"
-          content={
-            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
-          }
-        />
-        <meta name="robots" content="max-image-preview:large"></meta>
-        <meta name="robots" content="NOODP" />
-        <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
-        <meta property="og:image" content="headLogo.png" />
-
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
-      </Head>
       <PathBackButton />
+         <MessageFunc
+          message={message}
+          setMessageOpen={setOpenMessage}
+          messageOpen={openMessage}
+          onClose={() => setOpenMessage(false)}
+        />
       <div className="p-8 max-w-3xl mx-auto min-h-screen">
         <img
           src={product.image}
@@ -85,24 +79,32 @@ const ProductDetail = () => {
         <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
         <p className="text-lg  mb-2">₹{product.price}</p>
         <p className=" mb-6">{product.description}</p>
-
-        {isInCart ? (
-          <div className="flex items-center gap-4">
+        <div className="flex gap-4">
+          {isInCart ? (
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleRemoveFromCart}
+                className="bg-red-800 text-white px-4 py-2 rounded-lg cursor-pointer"
+              >
+                Remove
+              </button>
+            </div>
+          ) : (
             <button
-              onClick={handleRemoveFromCart}
-              className="bg-red-800 text-white px-4 py-2 rounded-lg cursor-pointer"
+              onClick={handleAddToCart}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer"
             >
-              Remove
+              Add
             </button>
-          </div>
-        ) : (
+          )}
           <button
-            onClick={handleAddToCart}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer"
+            onClick={handleWishlistToggle}
+            className="ml-4 text-2xl cursor-pointer"
+            title={isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
           >
-            Add
+            {isInWishlist ? "❤️" : "🤍"}
           </button>
-        )}
+        </div>
       </div>
     </>
   );

@@ -13,7 +13,7 @@ export default function MobileSidebar(props) {
   const toggleSidebar = () => setIsOpen(!isOpen);
   const closeSidebar = () => setIsOpen(false);
   return (
-    <div className="md:hidden">
+    <div className="md:hidden z-[999] ">
       <ConfirmationModal
         isOpen={openConfirmModal}
         onClose={() => setOpenConfirmModal(false)}

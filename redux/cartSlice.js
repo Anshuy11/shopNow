@@ -4,6 +4,8 @@ const initialState = {
   cartItems: [],
   totalQuantity: 0,
   totalAmount: 0,
+  wishlistItems: [],
+  totalWishlistItems: 0,
 };
 
 const cartSlice = createSlice({
@@ -76,6 +78,49 @@ const cartSlice = createSlice({
       state.totalQuantity = quantity;
       state.totalAmount = parseFloat(amount.toFixed(2));
     },
+
+    // New Wishlist Actions (only additions)
+    addToWishlist(state, action) {
+      const item = action.payload;
+      const existingItem = state.wishlistItems.find((i) => i.id === item.id);
+
+      if (!existingItem) {
+        state.wishlistItems.push(item);
+        state.totalWishlistItems = state.wishlistItems.length;
+        saveToLocalStorage(state);
+      }
+    },
+
+    removeFromWishlist(state, action) {
+      const itemId = action.payload;
+      state.wishlistItems = state.wishlistItems.filter(
+        (item) => item.id !== itemId
+      );
+      state.totalWishlistItems = state.wishlistItems.length;
+      saveToLocalStorage(state);
+    },
+
+    toggleWishlistItem(state, action) {
+      const item = action.payload;
+      const existingItem = state.wishlistItems.find((i) => i.id === item.id);
+
+      if (existingItem) {
+        state.wishlistItems = state.wishlistItems.filter(
+          (i) => i.id !== item.id
+        );
+      } else {
+        state.wishlistItems.push(item);
+      }
+      
+      state.totalWishlistItems = state.wishlistItems.length;
+      saveToLocalStorage(state);
+    },
+
+    clearWishlist(state) {
+      state.wishlistItems = [];
+      state.totalWishlistItems = 0;
+      saveToLocalStorage(state);
+    },
   },
 });
 
@@ -88,6 +133,8 @@ const saveToLocalStorage = (state) => {
           cartItems: state.cartItems,
           totalQuantity: state.totalQuantity,
           totalAmount: state.totalAmount,
+          wishlistItems: state.wishlistItems,
+          totalWishlistItems: state.totalWishlistItems,
         })
       );
     } catch (e) {
@@ -104,6 +151,10 @@ export const {
   decreaseQuantity,
   clearCart,
   calculateTotals,
+  addToWishlist,
+  removeFromWishlist,
+  toggleWishlistItem,
+  clearWishlist,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
