@@ -109,8 +109,8 @@ const Header = (props) => {
           >
             <img className="w-10 h-10 mt-5 cursor-pointer" src="/user.png" />
             {userOpen && (
-              <div className="relative">
-                <div className="absolute right-1  w-fit  bg-gray-100 border border-gray-200 rounded-md shadow-lg z-50 p-3 text-sm">
+              <div className="relative ">
+                <div className="absolute right-1 w-fit  bg-gray-100 border border-gray-200 rounded-md shadow-lg z-[999] p-3 text-sm">
                   {Object?.keys(user)?.length>0  ? (
                     <div>
                     <div className="w-full text-left font-medium text-gray-800 ">

@@ -1,4 +1,5 @@
-import React from "react";
+import { ThemeColor } from "@/context/ThemeContext";
+import React, { useContext } from "react";
 
 // GlobalSearch Component
 const GlobalSearch = ({
@@ -7,14 +8,17 @@ const GlobalSearch = ({
   filteredData,
   placeholder = "Search...",
 }) => {
+  const { theme } = useContext(ThemeColor);
   return (
-    <div className="w-full max-w-full mx-auto  relative">
+    <div className={`w-full max-w-full mx-auto  relative`}>
       <input
         type="text"
         placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="pr-10 border border-gray-300 rounded-xl px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+        className={`pr-10 border border-gray-300 rounded-xl px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full  ${
+          theme == "Light" ? "bg-white text-gray-900" : "bg-gray-600 text-white"
+        }`}
       />
 
       <svg

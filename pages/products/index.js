@@ -103,13 +103,14 @@ const router = useRouter()
       
       </Head>
       <div className="p-6">
-        <div className="w-full">
+        <div className="w-full sticky top-1 z-50 pb-4 mb-4">
           <GlobalSearch
             filteredData={filteredData}
             setQuery={setQuery}
             query={query}
           />
         </div>
+        
 
        {loading ? <Loader/>: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           {filteredData.map((product) => (
