@@ -7,16 +7,17 @@ import MobileSidebar from "./MobileSidebar";
 import SignInUpLofinForm from "./SignInUpLofinForm";
 import ConfirmationModal from "./ConfirmationModel";
 
+
 const Header = (props) => {
   const [userOpen, setUserOpen] = useState(false);
   const [signupLoginopen, setSignupLoginopen] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const { theme, ToggleFunc } = useContext(ThemeColor);
-  const { LogoutFunc, user, } =useContext(AuthContext);
+  const { LogoutFunc, user } = useContext(AuthContext);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const router = useRouter();
-  
+
   return (
     <div
       className={
@@ -31,10 +32,10 @@ const Header = (props) => {
         isOpen={openConfirmModal}
         onClose={() => setOpenConfirmModal(false)}
         onConfirm={LogoutFunc}
-        closeSidebar={()=>setIsOpen(false)}
+        closeSidebar={() => setIsOpen(false)}
         title="Log out"
         message="Are you sure you want to logout."
-          />
+      />
       {/* Logo section */}
       <div className="flex justify-start gap-8">
         <div className="flex justify-start items-start gap-6">
@@ -53,6 +54,22 @@ const Header = (props) => {
         </div>
       </div>
       <div className="flex  items-center pl-3 gap-4">
+        {/* Wishlist section */}
+        {Object?.keys(user)?.length > 0 ? (
+          <div
+            onClick={() => router.push("/wishlist")}
+            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-8"
+          >
+            🤍
+          </div>
+        ) : (
+          <div
+            onClick={() => setSignupLoginopen(true)}
+            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-8"
+          >
+            🤍
+          </div>
+        )}
         {/* Cart section */}
         <div
           onClick={() => router.push("/cart")}
@@ -111,21 +128,26 @@ const Header = (props) => {
             {userOpen && (
               <div className="relative ">
                 <div className="absolute right-1 w-fit  bg-gray-100 border border-gray-200 rounded-md shadow-lg z-[999] p-3 text-sm">
-                  {Object?.keys(user)?.length>0  ? (
+                  {Object?.keys(user)?.length > 0 ? (
                     <div>
-                    <div className="w-full text-left font-medium text-gray-800 ">
-                      {user.name}
+                      <div className="w-full text-left font-medium text-gray-800 ">
+                        {user.name}
                       </div>
                       <div className="w-full text-left font-medium text-gray-800 ">
-                      {user.email}
+                        {user.email}
                       </div>
-                      <div onClick={()=>setOpenConfirmModal(true)} className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer">
-                      Log Out
+                      <div
+                        onClick={() => setOpenConfirmModal(true)}
+                        className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer"
+                      >
+                        Log Out
+                      </div>
                     </div>
-                    </div>
-                  
                   ) : (
-                    <button onClick={()=>setSignupLoginopen(true)} className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer">
+                    <button
+                      onClick={() => setSignupLoginopen(true)}
+                      className="w-full text-left font-medium text-gray-800 hover:text-blue-600 cursor-pointer"
+                    >
                       Login
                     </button>
                   )}

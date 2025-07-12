@@ -125,7 +125,7 @@ const SignInUpLofinForm = (props) => {
     }));
   };
   return (
-    <Transition.Root show={props.open} as={Fragment} className="p-2 m-2 ">
+    <Transition.Root show={props.open} as={Fragment} className="p-2 m-2 z-[1000] ">
       <Dialog
         as="div"
         className="relative z-50 sm:block"

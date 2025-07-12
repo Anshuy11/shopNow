@@ -1,10 +1,10 @@
 import CarouselFunc from "@/components/Carousel ";
 import GlobalSearch from "@/components/GlobalSearch";
 import Loader from "@/components/Loader";
+import WishlistButton from "@/components/WishlistButton";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
-
 
 const index = () => {
   const [productsList, setProductsList] = useState([]);
@@ -44,17 +44,13 @@ const index = () => {
       )
     );
   }, [debouncedQuery, productsList]);
-const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        
-        <title>
-          {
-            "ShopNow - Your Smart Shopping Destination."
-          }
-        </title>
+
+        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
         <meta
           name="description"
           content={
@@ -64,23 +60,11 @@ const router = useRouter()
         <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="headLogo.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="headLogo.png"
-        />
+        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
         <meta
           property="og:title"
-          content={
-            "ShopNow - Your Smart Shopping Destination."
-          }
+          content={"ShopNow - Your Smart Shopping Destination."}
         />
         <meta property="og:type" content="website" />
         <meta
@@ -92,16 +76,11 @@ const router = useRouter()
         <meta name="robots" content="max-image-preview:large"></meta>
         <meta name="robots" content="NOODP" />
         <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
-        <meta
-          property="og:image"
-          content="headLogo.png"
-        />
-     
-       
+        <meta property="og:image" content="headLogo.png" />
+
         <meta name="mobile-web-app-capable" content="yes" />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
-      
       </Head>
       <div className="p-6">
         <div className="w-full sticky top-1 z-50  ">
@@ -111,31 +90,39 @@ const router = useRouter()
             query={query}
           />
         </div>
-        <CarouselFunc/>
-        
+        <CarouselFunc />
 
-       {loading ? <Loader/>: <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
-          {filteredData.map((product) => (
-            <div
-               onClick={() => router.push(`/products/${product.id}`)}
-              key={product.id}
-              className="border border-gray-200 rounded-lg shadow-xl p-4 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="h-24 object-contain w-full mb-4"
-              />
-              <div className="font-semibold text-md  mb-2">{product.title}</div>
-              <div className=" mb-2 text-[18px]">
-              ₹ {product.price}
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+            {filteredData.map((product) => (
+              <div
+                key={product.id}
+                className="border border-gray-200 rounded-lg shadow-xl p-4 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+              >
+                {/* Wishlist Button */}
+                <div className="flex justify-end">
+                  <WishlistButton product={product}  />
+                </div>
+                <div onClick={() => router.push(`/products/${product.id}`)}>
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="h-24 object-contain w-full mb-4"
+                  />
+                  <div className="font-semibold text-md  mb-2">
+                    {product.title}
+                  </div>
+                  <div className=" mb-2 text-[18px]">₹ {product.price}</div>
+                  <div className="text-[12px] text-gray-500 line-clamp-2 ">
+                    {product.description}
+                  </div>
+                </div>
               </div>
-              <div className="text-[12px] text-gray-500 line-clamp-2 ">
-                {product.description}
-              </div>
-            </div>
-          ))}
-        </div>}
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

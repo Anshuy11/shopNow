@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleWishlistItem, addToCart } from "@/redux/cartSlice";
 import { useRouter } from "next/router";
+import PathBackButton from "@/components/PathBackButton";
+import { AuthContext } from "@/context/AuthContext";
 
 const WishlistFunc = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+    const { user } = useContext(AuthContext);
   const cart = useSelector((state) => state.cart.cartItems);
   const wishlistItems = useSelector((state) => state.cart.wishlistItems);
 
@@ -17,9 +20,19 @@ const WishlistFunc = () => {
     dispatch(addToCart(product));
   };
 
+  if(Object?.keys(user)?.length==0 ){
+     return (
+      <div className="text-center p-10 ">
+       Please login to view wishlist ❤️.
+      </div>
+    );
+  }
+
+  
+
   if (wishlistItems.length === 0) {
     return (
-      <div className="text-center p-10 text-gray-600">
+      <div className="text-center p-10 ">
          Wishlist is empty 🥲
       </div>
     );
@@ -28,6 +41,7 @@ const WishlistFunc = () => {
   return (
     <>
      <div className="min-h-screen  px-4 py-6 sm:py-10">
+         <PathBackButton />
       <h1 className="text-3xl font-bold mb-6 text-center ">
         My Wishlist ❤️
       </h1>
@@ -38,18 +52,19 @@ const WishlistFunc = () => {
           return (
             <div
               key={item.id}
-              className="border border-gray-200 rounded-lg shadow-xl p-4 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 "
+              className="border border-gray-200 rounded-lg p-4 shadow-sm  flex flex-col items-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             >
-              <img
+                <div onClick={() => router.push(`/products/${item.id}`)} className="flex flex-col items-center "> <img
                 src={item.image}
                 alt={item.title}
-                className="h-40 object-contain mb-4 cursor-pointer items-center"
-                onClick={() => router.push(`/products/${item.id}`)}
+                className="h-40 object-contain mb-4 cursor-pointer"
+                
               />
               <h2 className="text-lg font-semibold text-center line-clamp-2">
                 {item.title}
               </h2>
-              <p className=" mt-2">₹{item.price}</p>
+              <p className=" mt-2">₹{item.price}</p></div>
+             
 
               <div className="mt-4 flex gap-2">
                 {isInCart ? (
@@ -66,7 +81,7 @@ const WishlistFunc = () => {
                 )}
                 <button
                   onClick={() => handleToggleWishlist(item)}
-                  className="text-red-600 px-3 py-2 text-xl hover:scale-110 transition-transform"
+                  className="text-red-600 px-3 py-2 text-xl hover:scale-110 transition-transform  cursor-pointer"
                   title="Remove from Wishlist"
                 >
                   ❤️

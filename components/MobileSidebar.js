@@ -72,6 +72,11 @@ export default function MobileSidebar(props) {
           <a href="/cart" className="">
             Cart
           </a>
+            {Object?.keys(user)?.length>0 ? <a href="/wishlist" className="">
+            Wishlist
+          </a>: <div onClick={() => setOpen(true)} className=" ">
+              Wishlist
+            </div>}
           {Object?.keys(user)?.length>0 ? (
             <div onClick={() => setOpenConfirmModal(true)} className=" ">
               Log Out

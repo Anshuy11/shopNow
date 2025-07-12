@@ -10,7 +10,7 @@ const MessageFunc = (props) => {
     <>
       <div
         aria-live="assertive"
-        className="pointer-events-none mt-10  fixed inset-0 z-50 flex items-center px-4 py-6 sm:items-start sm:p-4 w-full justify-center"
+        className="pointer-events-none mt-10  fixed inset-0 z-[10000] flex items-center px-4 py-6 sm:items-start sm:p-4 w-full justify-center"
       >
         <div className="flex w-full flex-col items-center space-y-4 ">
           <Transition

@@ -10,6 +10,7 @@ import PathBackButton from "@/components/PathBackButton";
 import Loader from "@/components/Loader";
 import Head from "next/head";
 import MessageFunc from "@/components/MessageModal";
+import WishlistButton from "@/components/WishlistButton";
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -24,10 +25,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
 
   const isInCart = cart?.find((item) => item.id === Number(id));
-  const wishlistItems = useSelector((state) => state.cart.wishlistItems);
 
-  const isInWishlist =
-    product && wishlistItems.some((item) => item.id === product.id);
 
   useEffect(() => {
     if (id) {
@@ -51,12 +49,7 @@ const ProductDetail = () => {
     }, 1500);
   };
 
-  const handleWishlistToggle = () => {
-    dispatch(toggleWishlistItem(product));
-     setOpenMessage(true);
-        messageCloseFunc();
-        setMessage(isInWishlist ?"Product remove from wishlist." :"Product added to wishlist." );
-  };
+ 
 
   if (loading) return <Loader />;
   if (!product) return <p className="p-6">Product not found</p>;
@@ -79,7 +72,7 @@ const ProductDetail = () => {
         <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
         <p className="text-lg  mb-2">₹{product.price}</p>
         <p className=" mb-6">{product.description}</p>
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-between">
           {isInCart ? (
             <div className="flex items-center gap-4">
               <button
@@ -97,13 +90,7 @@ const ProductDetail = () => {
               Add
             </button>
           )}
-          <button
-            onClick={handleWishlistToggle}
-            className="ml-4 text-2xl cursor-pointer"
-            title={isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-          >
-            {isInWishlist ? "❤️" : "🤍"}
-          </button>
+         <WishlistButton product={product}  />
         </div>
       </div>
     </>
