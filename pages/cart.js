@@ -4,7 +4,7 @@ import {
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
-  clearCart
+  clearCart,
 } from "@/redux/cartSlice";
 import PathBackButton from "@/components/PathBackButton";
 import { useRouter } from "next/router";
@@ -15,11 +15,12 @@ import MessageFunc from "@/components/MessageModal";
 
 const cart = () => {
   const [open, setOpen] = useState(false);
+  const [loder, setLoader] = useState(false);
   const [message, setMessage] = useState("");
   const [openMessage, setOpenMessage] = useState(false);
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const { cartItems, totalQuantity, totalAmount, } = useSelector(
+  const { cartItems, totalQuantity, totalAmount } = useSelector(
     (state) => state.cart
   );
   const messageCloseFunc = () => {
@@ -49,6 +50,7 @@ const cart = () => {
 
   // Function to handle the Razorpay payment
   const handlePayment = async () => {
+    setLoader(true);
     // Load Razorpay script
     const res = await loadRazorpayScript();
 
@@ -83,7 +85,6 @@ const cart = () => {
         messageCloseFunc();
         setMessage("Payment successful! Your order is arriving soon.");
         dispatch(clearCart());
-
       },
       prefill: {
         name: user.name,
@@ -101,6 +102,7 @@ const cart = () => {
     // Open the Razorpay payment modal
     const razorpay = new window.Razorpay(options);
     razorpay.open();
+    setLoader(false);
   };
 
   /* If there is no Item In Cart */
@@ -112,7 +114,6 @@ const cart = () => {
     );
   }
   const router = useRouter();
-  
 
   return (
     <>
@@ -242,12 +243,20 @@ const cart = () => {
 
         <div className="mt-10 border-t border-gray-500 pt-4 md:flex justify-around hidden">
           {Object?.keys(user)?.length > 0 ? (
-            <div
-              onClick={() => handlePayment()}
-              className="font-md cursor-pointer bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
-            >
-              Checkout
-            </div>
+            <>
+              {loder ? (
+                <div className=" cursor-none bg-gray-500 text-white p-2 rounded-lg  transition  animate-pulse text-center">
+                  Please wait...
+                </div>
+              ) : (
+                <div
+                  onClick={() => handlePayment()}
+                  className="font-md cursor-pointer bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
+                >
+                  Checkout
+                </div>
+              )}
+            </>
           ) : (
             <div
               onClick={() => setOpen(true)}
@@ -264,12 +273,20 @@ const cart = () => {
           <div className=" font-md">Quantity: {totalQuantity}</div>
           <div className=" font-md">Total: ₹ {totalAmount}</div>
           {Object?.keys(user)?.length > 0 ? (
-            <div
-              onClick={() => handlePayment()}
-              className="font-md cursor-pointer t bg-blue-500 text-white p-2 w-fit mt-2 rounded-md"
-            >
-              Checkout
-            </div>
+            <>
+              {loder ? (
+                <div className=" cursor-none bg-gray-500 text-white p-2 rounded-lg  transition  animate-pulse text-center">
+                  Please wait...
+                </div>
+              ) : (
+                <div
+                  onClick={() => handlePayment()}
+                  className="font-md cursor-pointer t bg-blue-500 text-white p-2 w-fit mt-2 rounded-md"
+                >
+                  Checkout
+                </div>
+              )}
+            </>
           ) : (
             <div
               onClick={() => setOpen(true)}

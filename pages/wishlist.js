@@ -4,6 +4,7 @@ import { toggleWishlistItem, addToCart } from "@/redux/cartSlice";
 import { useRouter } from "next/router";
 import PathBackButton from "@/components/PathBackButton";
 import { AuthContext } from "@/context/AuthContext";
+import Head from "next/head";
 
 const WishlistFunc = () => {
   const dispatch = useDispatch();
@@ -40,9 +41,44 @@ const WishlistFunc = () => {
 
   return (
     <>
-     <div className="min-h-screen  px-4 py-6 sm:py-10">
+      <Head>
+        <meta charSet="utf-8" />
+
+        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
+        <meta
+          name="description"
+          content={
+            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
+          }
+        />
+        <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
+        <meta
+          property="og:title"
+          content={"ShopNow - Your Smart Shopping Destination."}
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content={
+            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
+          }
+        />
+        <meta name="robots" content="max-image-preview:large"></meta>
+        <meta name="robots" content="NOODP" />
+        <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
+        <meta property="og:image" content="headLogo.png" />
+
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+      </Head>
+     <div className="">
          <PathBackButton />
-      <h1 className="text-3xl font-bold mb-6 text-center ">
+      <h1 className="lg:text-3xl text-xl font-bold mb-6 text-center ">
         My Wishlist ❤️
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -60,7 +96,7 @@ const WishlistFunc = () => {
                 className="h-40 object-contain mb-4 cursor-pointer"
                 
               />
-              <h2 className="text-lg font-semibold text-center line-clamp-2">
+              <h2 className="lg:text-lg text-sm lg:font-semibold text-center line-clamp-2">
                 {item.title}
               </h2>
               <p className=" mt-2">₹{item.price}</p></div>

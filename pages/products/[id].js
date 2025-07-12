@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   removeFromCart,
-  toggleWishlistItem,
 } from "@/redux/cartSlice";
 import PathBackButton from "@/components/PathBackButton";
 import Loader from "@/components/Loader";
@@ -56,6 +55,41 @@ const ProductDetail = () => {
 
   return (
     <>
+      <Head>
+        <meta charSet="utf-8" />
+
+        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
+        <meta
+          name="description"
+          content={
+            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
+          }
+        />
+        <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
+        <meta
+          property="og:title"
+          content={"ShopNow - Your Smart Shopping Destination."}
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content={
+            "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
+          }
+        />
+        <meta name="robots" content="max-image-preview:large"></meta>
+        <meta name="robots" content="NOODP" />
+        <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
+        <meta property="og:image" content="headLogo.png" />
+
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+      </Head>
       <PathBackButton />
          <MessageFunc
           message={message}
@@ -67,11 +101,11 @@ const ProductDetail = () => {
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-[300px] object-contain mb-6"
+          className="w-full h-[300px]  object-contain mb-6"
         />
-        <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
-        <p className="text-lg  mb-2">₹{product.price}</p>
-        <p className=" mb-6">{product.description}</p>
+        <h1 className="lg:text-xl text-sm font-semibold lg:font-bold mb-4">{product.title}</h1>
+        <p className="lg:text-lg text-sm mb-2">₹{product.price}</p>
+        <p className="text-sm lg:text-md mb-6">{product.description}</p>
         <div className="flex gap-4 justify-between">
           {isInCart ? (
             <div className="flex items-center gap-4">
