@@ -24,8 +24,8 @@ export default function MobileSidebar(props) {
       />
       <SignInUpLofinForm setOpen={setOpen} open={open} />
 
-      <button onClick={toggleSidebar} className="p-2 mt-10">
-        <Bars3Icon className="w-6 h-6 " />
+      <button onClick={toggleSidebar} className="p-2 mt-9">
+        <Bars3Icon className="w-9 h-9 " />
       </button>
 
       {/* Overlay */}

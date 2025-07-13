@@ -42,12 +42,7 @@ const ProductDetail = () => {
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(product.id));
   };
-    const messageCloseFunc = () => {
-    setTimeout(() => {
-      setOpenMessage(false);
-    }, 1500);
-  };
-
+  
  
 
   if (loading) return <Loader />;

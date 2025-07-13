@@ -41,15 +41,24 @@ const Header = (props) => {
         <div className="flex justify-start items-start gap-6">
           <div
             onClick={() => router.push("/")}
-            className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] md:flex gap-1 cursor-pointer hidden"
+            className="text-white  font-semibold sm:text-[14px] text-[12px] md:flex gap-1 cursor-pointer hidden "
           >
             <img
-              className="h-[100px] w-[100px] object-contain -mt-2 "
+              className="h-[150px] w-[150px] object-contain -mt-2 "
               src="/logo.png"
             />
+            
+
           </div>
           <div className="text-white mt-3  font-semibold sm:text-[14px] text-[12px] flex gap-1 cursor-pointer md:hidden">
-            <MobileSidebar theme={theme} />
+            
+             <MobileSidebar theme={theme} />
+              <img
+               onClick={() => router.push("/")}
+              className="h-[100px] w-[100px] object-contain mt-2 "
+              src="/logo.png"
+            />
+           
           </div>
         </div>
       </div>
@@ -58,14 +67,14 @@ const Header = (props) => {
         {Object?.keys(user)?.length > 0 ? (
           <div
             onClick={() => router.push("/wishlist")}
-            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-8"
+            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-9"
           >
             🤍
           </div>
         ) : (
           <div
             onClick={() => setSignupLoginopen(true)}
-            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-8"
+            className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-9"
           >
             🤍
           </div>
