@@ -125,6 +125,14 @@ const SignInUpLofinForm = (props) => {
     }));
   };
   return (
+    <>
+      <MessageFunc
+                message={messageText}
+                setMessageOpen={setMessageOpen}
+                messageOpen={messageOpen}
+                onClose={() => setMessageOpen(false)}
+              />
+   
     <Transition.Root show={props.open} as={Fragment} className="p-2 m-2 z-[1000] ">
       <Dialog
         as="div"
@@ -163,12 +171,7 @@ const SignInUpLofinForm = (props) => {
               }  overflow-x-auto w-fit   sm:p-6`}
             >
               {/* Your code here */}
-              <MessageFunc
-                message={messageText}
-                setMessageOpen={setMessageOpen}
-                messageOpen={messageOpen}
-                onClose={() => setMessageOpen(false)}
-              />
+            
               <div className="flex justify-end items-end gap-6">
                 <div className="mt-2">
                   <button
@@ -293,7 +296,8 @@ const SignInUpLofinForm = (props) => {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition.Root> </>
+
   );
 };
 

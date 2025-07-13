@@ -16,7 +16,7 @@ const CarouselFunc = () => {
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 2000,
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
@@ -37,6 +37,14 @@ const CarouselFunc = () => {
 
   return (
     <div className="w-full py-3">
+         <style>
+        {`
+          .slick-prev:before, .slick-next:before {
+            color: #BDBDBD !important;
+           
+          }
+        `}
+      </style>
       <Slider {...settings}>
         {images.map((img, idx) => (
           <div key={idx} className="px-2">
