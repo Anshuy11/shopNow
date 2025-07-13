@@ -6,6 +6,7 @@ import { AuthContext } from "@/context/AuthContext";
 import MobileSidebar from "./MobileSidebar";
 import SignInUpLofinForm from "./SignInUpLofinForm";
 import ConfirmationModal from "./ConfirmationModel";
+import { FaHeart } from "react-icons/fa";
 
 
 const Header = (props) => {
@@ -69,14 +70,14 @@ const Header = (props) => {
             onClick={() => router.push("/wishlist")}
             className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-9"
           >
-            🤍
+            <FaHeart className="text-white" />
           </div>
         ) : (
           <div
             onClick={() => setSignupLoginopen(true)}
             className="relative text-[30px] flex justify-start items-start gap-6 cursor-pointer mt-9"
           >
-            🤍
+           <FaHeart className="text-white" />
           </div>
         )}
         {/* Cart section */}

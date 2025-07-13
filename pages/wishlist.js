@@ -96,7 +96,7 @@ const WishlistFunc = () => {
                 className="h-40 object-contain mb-4 cursor-pointer"
                 
               />
-              <h2 className="lg:text-lg text-sm lg:font-semibold text-center line-clamp-2">
+              <h2 className="lg:text-md text-sm text-center line-clamp-2">
                 {item.title}
               </h2>
               <p className=" mt-2">₹{item.price}</p></div>
@@ -117,10 +117,10 @@ const WishlistFunc = () => {
                 )}
                 <button
                   onClick={() => handleToggleWishlist(item)}
-                  className="text-red-600 px-3 py-2 text-xl hover:scale-110 transition-transform  cursor-pointer"
+                  className="text-red-600 px-3 py-2 text-sm bg-red-100 rounded-lg  hover:scale-110 transition-transform  cursor-pointer"
                   title="Remove from Wishlist"
                 >
-                  ❤️
+                  Remove
                 </button>
               </div>
             </div>
