@@ -28,7 +28,7 @@
 
 
 ## 📁 Folder Structure 
-
+ \`\`\`
  shopNow/
   ├── public/
   │   ├── assets               # Static images, logos
@@ -70,7 +70,7 @@
   ├── postcss.config.js
   ├── next.config.js
   └── README.md
-
+\`\`\`
 
 
 
