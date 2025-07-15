@@ -34,7 +34,7 @@ const ConfirmationModal = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-gray-300 p-6 shadow-xl transition-all">
+            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl text-gray-900 bg-white border border-gray-300 p-6 shadow-xl transition-all">
               <Dialog.Title className="text-[16px] font-semibold text-center">
                 {title}
               </Dialog.Title>
