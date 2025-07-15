@@ -74,7 +74,9 @@
 
 ## 📽️ ShopNow Demo Video
 
-<video src="public/shopnow-demo.mp4" controls width="100%"></video>
+
+👉 [Click here to watch the demo](https://raw.githubusercontent.com/Anshuy11/shopNow/main/public/shopnow-demo.mp4)
+
 
 
 - **How to Run Locally/**
