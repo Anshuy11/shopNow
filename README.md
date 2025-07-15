@@ -72,7 +72,7 @@
   └── README.md
 \`\`\`
 
-## 📽️ ShopNow Demo Video
+- ** 📽️ ShopNow Demo Video/**
 
 
 👉 [Click here to watch the demo](https://raw.githubusercontent.com/Anshuy11/shopNow/main/public/shopnow-demo.mp4)
