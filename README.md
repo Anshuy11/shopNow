@@ -29,7 +29,7 @@
 
 ## 📁 Folder Structure 
  \`\`\`
- - shopNow/
+ ## shopNow/
   - ├── public/
     │   ├── assets               # Static images, logos
     │   └── favicon.ico
