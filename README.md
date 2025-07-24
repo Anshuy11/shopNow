@@ -29,47 +29,47 @@
 
 ## 📁 Folder Structure 
  \`\`\`
- shopNow/
-  ├── public/
-  │   ├── assets               # Static images, logos
-  │   └── favicon.ico
-  ├── components/              # Reusable UI components
-  │   ├── Header.jsx
-  │   ├── Footer.jsx
-  │   ├── ConfirmationModel.jsx 
-  │   ├── Carousel.jsx
-  │   ├── GlobalSearch.jsx
-  │   ├── Layout.jsx
-  │   ├── Loader.jsx
-  │   ├── MessageModal.jsx
-  │   ├── MobileSidebar.jsx
-  │   ├── PathBackButton.jsx
-  │   ├── SigninLoginForm.jsx
-  │   └── WishlistButton.jsx
-  ├── context/                
-  │   ├── AuthContext.js       # api logic for login and signup
-  │   └── ThemeContext.js      # theme logic 
-  ├── pages/                   # Next.js pages
-  │   ├── index.jsx            # Homepage
-  │   ├── product/
-  │          ├──   [id].jsx    # Product details page
-  │          ├──index.jsx       # Product list page
-  │   ├── cart.jsx             # Cart page
-  │   ├── wishlist.jsx         # Wishlist page
-  │   ├── checkout.jsx         # Checkout page
-  │   └── api/                 # api 
-  │       ├── razorpay.js
-  │      
-  ├── redux/                   # Redux Toolkit setup
-  │   ├── store.js
-  │   ├── cartSlice.js         # cart wishlist logic
-  ├── styles/                  # Global and custom styles
-  │   └── globals.css
-  ├── .env.local               # API keys and URLs
-  ├── tailwind.config.js
-  ├── postcss.config.js
-  ├── next.config.js
-  └── README.md
+ ## shopNow/
+  - ├── public/
+    │   ├── assets               # Static images, logos
+    │   └── favicon.ico
+  - ├── components/              # Reusable UI components
+    │   ├── Header.jsx
+    │   ├── Footer.jsx
+    │   ├── ConfirmationModel.jsx 
+    │   ├── Carousel.jsx
+    │   ├── GlobalSearch.jsx
+    │   ├── Layout.jsx
+    │   ├── Loader.jsx
+    │   ├── MessageModal.jsx
+    │   ├── MobileSidebar.jsx
+    │   ├── PathBackButton.jsx
+    │   ├── SigninLoginForm.jsx
+    │   └── WishlistButton.jsx
+  - ├── context/                
+    │   ├── AuthContext.js       # api logic for login and signup
+    │   └── ThemeContext.js      # theme logic 
+  - ├── pages/                   # Next.js pages
+    │   ├── index.jsx            # Homepage
+    │   ├── product/
+    │          ├──   [id].jsx    # Product details page
+    │          ├──index.jsx       # Product list page
+    │   ├── cart.jsx             # Cart page
+    │   ├── wishlist.jsx         # Wishlist page
+    │   ├── checkout.jsx         # Checkout page
+    │   └── api/                 # api 
+    │       ├── razorpay.js
+    │      
+  - ├── redux/                   # Redux Toolkit setup
+    │   ├── store.js
+    │   ├── cartSlice.js         # cart wishlist logic
+  - ├── styles/                  # Global and custom styles
+    │   └── globals.css
+  - ├── .env.local               # API keys and URLs
+  - ├── tailwind.config.js
+  - ├── postcss.config.js
+  - ├── next.config.js
+  - └── README.md
 \`\`\`
 
 - ** 📽️ ShopNow Demo Video/**
