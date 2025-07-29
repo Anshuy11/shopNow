@@ -95,7 +95,7 @@
   - npm run dev
  ## Now Run 
  - Here you can see my backend code for Auth login
- -        [Backend](https://github.com/Anshuy11/shopNow_Backend)
+ -        https://github.com/Anshuy11/shopNow_Backend
 
 
   ## 🙌 Credits
