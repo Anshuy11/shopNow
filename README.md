@@ -1,5 +1,5 @@
 🛒 - `ShopNow` –  E-commerce App (Link - https://shop-now-chi.vercel.app/)
- - ShopNow is a modern frontend-heavy e-commerce application focused on providing users with a fast and seamless shopping experience. Built with Next.js, Tailwind CSS, Redux, and Razorpay integration, the project showcases a smooth and responsive user experience across devices with dual theme with the help of context API.
+ - ShopNow is a modern frontend-heavy e-commerce application focused on providing users with a fast and seamless shopping experience. Built with Next.js, Tailwind CSS, Redux, and Razorpay integration, the project showcases a smooth and responsive user experience across devices with dual theme with the help of context API . Comprehensive testing is implemented using Jest and React Testing Library (RTL) to ensure component reliability and performance.
 
 ## 🚀 Features
 
@@ -10,6 +10,7 @@
 - Cart Management: Add, remove, quantity update
 - Checkout Flow: Razorpay test-mode payment integration
 - Responsive UI: Fully mobile-friendly experience
+- Wrote unit and integration tests using Jest and React Testing Library, achieving high test coverage and reliability. 
 
 
 🧠 Tech Stack
@@ -25,6 +26,8 @@
 | **MongoDB**       | Database                   |
 | **Nodejs.js**     | Backend API                |
 | **RESTFUL**       | API Calls                  |
+| **Jest**          |testing Components          |
+| **RTI**           | testing Components         |
 
 
 ## 📁 Folder Structure 
@@ -34,10 +37,14 @@
     │   ├── assets               # Static images, logos
     │   └── favicon.ico
   - ├── components/              # Reusable UI components
+    │   ├── Carousel/
+    │   │   ├── Carousel.jsx
+    │   │   └── Carousel.test.js  # testing component
+    │   └── ConfirmationModel/
+    │       ├── ConfirmationModel.jsx
+    │       └── ConfirmationModel.test.js # testing component
     │   ├── Header.jsx
     │   ├── Footer.jsx
-    │   ├── ConfirmationModel.jsx 
-    │   ├── Carousel.jsx
     │   ├── GlobalSearch.jsx
     │   ├── Layout.jsx
     │   ├── Loader.jsx
@@ -93,6 +100,8 @@
 
  ## Now Run 
   - npm run dev
+## for testing
+  - npm run test
  ## Now Run 
  - Here you can see my backend code for Auth login
  -        https://github.com/Anshuy11/shopNow_Backend
