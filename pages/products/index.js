@@ -28,9 +28,9 @@ const index = () => {
   // fetch api data
   const ProductListFunc = () => {
     setLoading(true);
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://dummyjson.com/products")
       .then((response) => response.json())
-      .then((result) => setProductsList(result))
+      .then((result) => setProductsList(result.products))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
@@ -107,7 +107,7 @@ const index = () => {
                 </div>
                 <div onClick={() => router.push(`/products/${product.id}`)}>
                   <img
-                    src={product.image}
+                    src={product.images[0]}
                     alt={product.title}
                     className="h-24 object-contain w-full mb-4"
                   />

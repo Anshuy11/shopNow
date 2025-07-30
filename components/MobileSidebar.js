@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AuthContext } from "@/context/AuthContext";
-import ConfirmationModal from "./ConfirmationModel";
+import ConfirmationModal from "./ConfirmationModel/ConfirmationModel";
 import SignInUpLofinForm from "./SignInUpLofinForm";
 
 export default function MobileSidebar(props) {

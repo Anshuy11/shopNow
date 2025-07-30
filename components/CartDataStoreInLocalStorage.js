@@ -12,13 +12,13 @@ const CartDataStoreInLocalStorage = () => {
         try {
           const parsed = JSON.parse(saved);
           
-          // Ensure wishlist properties exist, even if they're not in localStorage
+          // Ensures wishlist properties exist, even if they're not in localStorage
           const cartWithWishlist = {
             cartItems: parsed.cartItems || [],
             totalQuantity: parsed.totalQuantity || 0,
             totalAmount: parsed.totalAmount || 0,
-            wishlistItems: parsed.wishlistItems || [], // Add this
-            totalWishlistItems: parsed.totalWishlistItems || 0, // Add this
+            wishlistItems: parsed.wishlistItems || [], 
+            totalWishlistItems: parsed.totalWishlistItems || 0, 
           };
           
           dispatch(hydrateCart(cartWithWishlist));

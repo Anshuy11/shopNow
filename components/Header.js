@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContext";
 import MobileSidebar from "./MobileSidebar";
 import SignInUpLofinForm from "./SignInUpLofinForm";
-import ConfirmationModal from "./ConfirmationModel";
+import ConfirmationModal from "./ConfirmationModel/ConfirmationModel";
 import { FaHeart } from "react-icons/fa";
 
 

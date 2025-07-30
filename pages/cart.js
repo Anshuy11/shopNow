@@ -170,7 +170,7 @@ const cart = () => {
             >
               <div className="flex items-center space-x-4 md:w-2/3 w-4/5 ">
                 <img
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.title}
                   className="w-16 h-16 object-contain"
                 />

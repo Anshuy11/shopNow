@@ -91,7 +91,7 @@ const WishlistFunc = () => {
               className="border border-gray-200 rounded-lg p-4 shadow-sm  flex flex-col items-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             >
                 <div onClick={() => router.push(`/products/${item.id}`)} className="flex flex-col items-center "> <img
-                src={item.image}
+                src={item.images[0]}
                 alt={item.title}
                 className="h-40 object-contain mb-4 cursor-pointer"
                 

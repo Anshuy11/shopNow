@@ -28,7 +28,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`https://fakestoreapi.com/products/${id}`)
+      fetch(`https://dummyjson.com/products/${id}`)
         .then((res) => res.json())
         .then((data) => setProduct(data))
         .finally(() => setLoading(false));
@@ -94,7 +94,7 @@ const ProductDetail = () => {
         />
       <div className="p-8 max-w-3xl mx-auto min-h-screen">
         <img
-          src={product.image}
+          src={product.images[0]}
           alt={product.title}
           className="w-full h-[300px]  object-contain mb-6"
         />
