@@ -67,8 +67,8 @@
     │   └── globals.css
   - ├── .env.local               # API keys and URLs
   - ├── tailwind.config.js
-  - ├── postcss.config.js
-  - ├── next.config.js
+  - ├── postcss.config.mjs
+  - ├── next.config.mjs
   - └── README.md
 \`\`\`
 
@@ -93,7 +93,9 @@
 
  ## Now Run 
   - npm run dev
-
+ ## Now Run 
+ - Here you can see my backend code for Auth login
+ -        https://github.com/Anshuy11/shopNow_Backend
 
 
   ## 🙌 Credits
