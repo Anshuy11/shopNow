@@ -283,7 +283,18 @@ const SignInUpLofinForm = (props) => {
                       {showSignin ? "Sign Up" : "Login"}
                     </button>
                   )}
+                  <div className="text-center">
+                     <button
+                       type="submit"
+                      onClick={() => { setEmail("testuser1@gmail.com"); setPassword("Testing@0")}}
+                    className={` p-2  text-blue-500   cursor-pointer  text-center rounded-md } `}
+                  >
+                    Login as Guest
+                  </button>
 
+
+                  </div>
+                  
                   <div
                     onClick={() => setShowSignin(!showSignin)}
                     className={` p-2  text-blue-500  text-center cursor-pointer   rounded-md } `}

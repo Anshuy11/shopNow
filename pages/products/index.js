@@ -109,6 +109,7 @@ const index = () => {
                   <img
                     src={product.images[0]}
                     alt={product.title}
+                     loading="lazy"
                     className="h-24 object-contain w-full mb-4"
                   />
                   <div className="font-semibold text-md  mb-2">

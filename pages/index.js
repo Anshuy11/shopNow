@@ -1,9 +1,11 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Products from './products'
+
+//import Products from './products'
 import Head from "next/head";
+import dynamic from "next/dynamic";
+import CardSkeleton from "@/components/CardSkeleton";
+const Products = dynamic(() => import("./products"), {
+  loading: () => <CardSkeleton />,
+});
 
 
 
