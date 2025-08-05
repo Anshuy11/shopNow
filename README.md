@@ -44,6 +44,7 @@
     │       ├── ConfirmationModel.jsx
     │       └── ConfirmationModel.test.js # testing component
     │   ├── Header.jsx
+    │   ├── CardSkeleton.jsx  # for skeleton card
     │   ├── Footer.jsx
     │   ├── GlobalSearch.jsx
     │   ├── Layout.jsx
