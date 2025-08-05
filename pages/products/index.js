@@ -47,24 +47,30 @@ const index = () => {
   const router = useRouter();
   return (
     <>
-      <Head>
+     <Head>
         <meta charSet="utf-8" />
 
-        <title>{"ShopNow - Your Smart Shopping Destination."}</title>
+        <title>
+          {
+            "ShopNow - Your Smart Shopping Destination."
+          }
+        </title>
         <meta
           name="description"
           content={
             "ShopNow is a modern e-commerce app built with Next.js, Tailwind CSS, Redux, and Context API for fast, seamless shopping with cart persistence and theming."
           }
         />
-        <link rel="canonical" href="https://shop-now-chi.vercel.app/" />
+        <link rel="canonical" href="https://portfolios-dusky.vercel.app/" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-        <link rel="icon" type="image/png" sizes="32x32" href="headLogo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="headLogo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico" />
         <meta
           property="og:title"
-          content={"ShopNow - Your Smart Shopping Destination."}
+          content={
+            "ShopNow - Your Smart Shopping Destination."
+          }
         />
         <meta property="og:type" content="website" />
         <meta
@@ -75,8 +81,11 @@ const index = () => {
         />
         <meta name="robots" content="max-image-preview:large"></meta>
         <meta name="robots" content="NOODP" />
-        <meta property="og:url" content="https://shop-now-chi.vercel.app/" />
-        <meta property="og:image" content="headLogo.png" />
+        <meta
+          property="og:url"
+          content="https://portfolios-dusky.vercel.app/"
+        />
+        <meta property="og:image" content="favicon.ico" />
 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta property="og:image:width" content="200" />
