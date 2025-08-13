@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const messageCloseFunc = () => {
     setTimeout(() => {
       setMessageOpen(false);
-    }, 5000);
+    }, 2000);
   };
 
   const handleSubmitSignUp = ({ name, email, password }) => {

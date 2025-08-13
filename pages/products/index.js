@@ -1,5 +1,5 @@
-import CarouselFunc from "@/components/Carousel ";
-import GlobalSearch from "@/components/GlobalSearch";
+import CarouselFunc from "@/components/Casousel/Carousel ";
+import GlobalSearch from "@/components/GlobalSearch/GlobalSearch";
 import Loader from "@/components/Loader";
 import WishlistButton from "@/components/WishlistButton";
 import Head from "next/head";
@@ -99,7 +99,7 @@ const index = () => {
             query={query}
           />
         </div>
-        <CarouselFunc />
+        <CarouselFunc/>
 
         {loading ? (
           <Loader />

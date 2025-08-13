@@ -38,33 +38,35 @@
     │   └── favicon.ico
   - ├── components/              # Reusable UI components
     │   ├── Carousel/
-    │   │   ├── Carousel.jsx
+    │   │   ├── Carousel.js
     │   │   └── Carousel.test.js  # testing component
     │   └── ConfirmationModel/
-    │       ├── ConfirmationModel.jsx
-    │       └── ConfirmationModel.test.js # testing component
-    │   ├── Header.jsx
-    │   ├── CardSkeleton.jsx  # for skeleton card
-    │   ├── Footer.jsx
-    │   ├── GlobalSearch.jsx
-    │   ├── Layout.jsx
-    │   ├── Loader.jsx
-    │   ├── MessageModal.jsx
-    │   ├── MobileSidebar.jsx
-    │   ├── PathBackButton.jsx
-    │   ├── SigninLoginForm.jsx
-    │   └── WishlistButton.jsx
+    │   │    ├── ConfirmationModel.js
+    │   │    └── ConfirmationModel.test.js # testing component
+    │   └── GlobalSearch/
+    │       ├── GlobalSearch.js
+    │       └── GlobalSearch.test.js # testing component
+    │   ├── Header.js
+    │   ├── CardSkeleton.js  # for skeleton card
+    │   ├── Footer.js
+    │   ├── Layout.js
+    │   ├── Loader.js
+    │   ├── MessageModal.js
+    │   ├── MobileSidebar.js
+    │   ├── PathBackButton.js
+    │   ├── SigninLoginForm.js
+    │   └── WishlistButton.js
   - ├── context/                
     │   ├── AuthContext.js       # api logic for login and signup
     │   └── ThemeContext.js      # theme logic 
   - ├── pages/                   # Next.js pages
-    │   ├── index.jsx            # Homepage
+    │   ├── index.js            # Homepage
     │   ├── product/
-    │          ├──   [id].jsx    # Product details page
-    │          ├──index.jsx       # Product list page
-    │   ├── cart.jsx             # Cart page
-    │   ├── wishlist.jsx         # Wishlist page
-    │   ├── checkout.jsx         # Checkout page
+    │          ├──   [id].js    # Product details page
+    │          ├──index.js       # Product list page
+    │   ├── cart.js             # Cart page
+    │   ├── wishlist.js         # Wishlist page
+    │   ├── checkout.js         # Checkout page
     │   └── api/                 # api 
     │       ├── razorpay.js
     │      
